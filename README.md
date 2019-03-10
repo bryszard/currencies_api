@@ -1,24 +1,9 @@
-# README
+# Currencies API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Small wrapper API for returning bunch of information about the exchange rates from https://api.exchangeratesapi.io/latest.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+API includes 4 endpoints:
+- /currencies comma separated list of currencies, sorted in descending order (example: ZAR, EUR, AUD)
+- /currencies/show value of currency
+- /rates - it returns highest and lowest rate value (example: PLN - 4.2925, CAD - 1.5174)
+- /download - it returns json file with list currencies and rates ; use MD5 hash of json string as a filename -> [md5hash].json
