@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     get 'currencies', to: 'currencies#list'
     get 'currencies/show', to: 'currencies#show'
+    get 'rates', to: 'currencies#extremes'
+    get 'download', to: 'currencies#download'
   end
 end

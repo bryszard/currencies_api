@@ -20,6 +20,19 @@ class V1::CurrenciesController < ApplicationController
     end
   end
 
+  def extremes
+    extreme_rates = exchange_rates['rates'].minmax { |a, b| a[1] <=> b[1] }.to_h
+
+    render json: extreme_rates, status: :ok
+  end
+
+  def download
+    payload = exchange_rates['rates'].to_json
+    filename = "#{Digest::MD5.hexdigest(payload)}.json"
+
+    send_data(payload, filename: filename, type: 'application/json', disposition: 'attachment')
+  end
+
   private
 
   def check_availability
@@ -30,5 +43,9 @@ class V1::CurrenciesController < ApplicationController
 
   def exchange_rates
     @_exchange_rates ||= Actions::FetchCurrencyData.perform
+  end
+
+  def send_file(full_path)
+    file = File.open()
   end
 end
