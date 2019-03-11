@@ -44,8 +44,4 @@ class V1::CurrenciesController < ApplicationController
   def exchange_rates
     @_exchange_rates ||= Actions::FetchCurrencyData.perform
   end
-
-  def send_file(full_path)
-    file = File.open()
-  end
 end
