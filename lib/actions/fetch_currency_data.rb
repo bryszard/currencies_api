@@ -13,6 +13,10 @@ module Actions
 
         JSON.parse(response)
       end
+    rescue StandardError => e
+      Rails.logger.error e
+
+      nil
     end
   end
 end

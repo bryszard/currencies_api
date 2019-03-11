@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'Fetching list of currencies in descending alphabetical order', type: :request do
   subject { get '/v1/currencies' }
 
+  it_behaves_like 'exchange rates endpoints'
+
   it 'returns a list of available currencies in a String, comma separated', :vcr do
     subject
 

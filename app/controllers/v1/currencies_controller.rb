@@ -3,14 +3,24 @@
 class V1::CurrenciesController < ApplicationController
   TEMPORARILY_UNAVAILABLE_MESSAGE = 'Exchange rates are temporarily not available.'
 
-  def list
-    if(current_rates = exchange_rates['rates'])
-      available_currencies = current_rates.keys.sort.reverse.join(',')
+  before_action :check_availability
 
-      render plain: available_currencies, status: :ok
+  def list
+    available_currencies = exchange_rates['rates'].keys.sort.reverse.join(',')
+
+    render plain: available_currencies, status: :ok
+  end
+
     else
-      render plain: TEMPORARILY_UNAVAILABLE_MESSAGE, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def check_availability
+    return true unless exchange_rates.blank?
+
+    render plain: TEMPORARILY_UNAVAILABLE_MESSAGE, status: :service_unavailable
   end
 
   def exchange_rates
