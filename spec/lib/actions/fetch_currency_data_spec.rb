@@ -8,7 +8,7 @@ describe Actions::FetchCurrencyData do
       Rails.cache.clear
     end
 
-    it 'fetches recent exchange rates data (for EUR), saves it in a cache' do
+    it 'fetches recent exchange rates data (for EUR), saves it in a cache', :vcr do
       expect(subject['rates'].keys.count).to eq(32)
 
       expect(subject['base']).to eq('EUR')
